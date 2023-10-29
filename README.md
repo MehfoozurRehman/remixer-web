@@ -1,4 +1,4 @@
-# project_name
+# remixer
 
 ## Description
 
