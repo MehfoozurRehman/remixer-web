@@ -1,7 +1,7 @@
 import Helmet from "react-helmet";
 import { useMemo } from "react";
 
-export default function Meta({
+export default function Head({
   title,
   description,
   url,
