@@ -2,39 +2,44 @@ import { useCallback, useEffect, useState } from "react";
 
 import getMatchingRoute from "./getMatchingRoute";
 
-export default (to, prefetch = true) => {
+const ROOT_MARGIN = "200px";
+
+export default function usePrefetchLink(to, prefetch = true) {
   const [prefetched, setPrefetched] = useState(false);
 
-  useEffect(() => {
+  const preloadRoute = () => {
     const route = getMatchingRoute(to);
-    const preload = () => route?.preload() && setPrefetched(true);
-    const prefetchable = Boolean(route && !prefetched);
+    if (route) {
+      try {
+        route.preload();
+        setPrefetched(true);
+      } catch (error) {
+        console.error("Error while preloading route:", error);
+      }
+    }
+  };
 
-    if (prefetchable && prefetch) {
+  useEffect(() => {
+    if (!prefetched && prefetch) {
       const observer = new IntersectionObserver(
         ([entry]) => {
           if (entry.isIntersecting) {
-            preload();
+            preloadRoute();
             observer.unobserve(ref.current);
           }
         },
-        { rootMargin: "200px" }
+        { rootMargin: ROOT_MARGIN }
       );
       observer.observe(ref.current);
       return () => observer.disconnect();
     }
-
-    return undefined;
   }, [to, prefetch, prefetched]);
 
   const handleMouseEnter = useCallback(() => {
-    if (prefetched) return;
-    const route = getMatchingRoute(to);
-    if (route) {
-      route.preload();
-      setPrefetched(true);
+    if (!prefetched) {
+      preloadRoute();
     }
   }, [to, prefetched]);
 
   return { handleMouseEnter };
-};
+}
