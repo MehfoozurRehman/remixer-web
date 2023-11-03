@@ -12,12 +12,12 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-helmet": "^6.1.0",
-    "react-router-dom": "6.17.0"
+    "react-router-dom": "6.18.0"
   },
   "devDependencies": {
-    "@types/react": "^18.2.33",
+    "@types/react": "^18.2.34",
     "@types/react-dom": "^18.2.14",
-    "@vitejs/plugin-react": "^4.1.0",
+    "@vitejs/plugin-react": "^4.1.1",
     "sass": "^1.69.5",
     "typescript": "^5.2.2",
     "vite": "^4.5.0",
@@ -26,6 +26,6 @@
     "vite-plugin-hot-export": "^0.5.9",
     "vite-plugin-imagemin": "^0.6.1",
     "vite-plugin-pwa": "^0.16.6",
-    "vite-plugin-webfont-dl": "^3.7.6"
+    "vite-plugin-webfont-dl": "^3.8.0"
   }
 }
