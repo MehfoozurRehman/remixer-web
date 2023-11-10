@@ -1,10 +1,11 @@
+import { existsSync, mkdirSync, writeFileSync } from "fs";
+
 import HotExport from "vite-plugin-hot-export";
 import { VitePWA } from "vite-plugin-pwa";
 import { ViteWebfontDownload } from "vite-plugin-webfont-dl";
 import { chunkSplitPlugin } from "vite-plugin-chunk-split";
 import { config } from "./remix.config";
 import { defineConfig } from "vite";
-import fs from "fs";
 import react from "@vitejs/plugin-react";
 import viteCompression from "vite-plugin-compression";
 import viteImagemin from "vite-plugin-imagemin";
@@ -31,7 +32,19 @@ const jsConfig = {
   },
 };
 
-fs.writeFileSync("./jsconfig.json", JSON.stringify(jsConfig, null, 2));
+writeFileSync("./jsconfig.json", JSON.stringify(jsConfig, null, 2));
+
+// create assets and components folder
+const assetsFolder = "./src/assets";
+const componentsFolder = "./src/components";
+
+if (!existsSync(assetsFolder)) {
+  mkdirSync(assetsFolder);
+}
+
+if (!existsSync(componentsFolder)) {
+  mkdirSync(componentsFolder);
+}
 
 export default defineConfig({
   resolve: { alias },
