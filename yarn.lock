@@ -1320,10 +1320,10 @@
   resolved "https://registry.yarnpkg.com/@types/prop-types/-/prop-types-15.7.9.tgz#b6f785caa7ea1fe4414d9df42ee0ab67f23d8a6d"
   integrity sha512-n1yyPsugYNSmHgxDFjicaI2+gCNjsBck8UX9kuofAKlc0h1bL+20oSF72KeNaW2DUlesbEVCFgyV2dPGTiY42g==
 
-"@types/react-dom@^18.2.14":
-  version "18.2.14"
-  resolved "https://registry.yarnpkg.com/@types/react-dom/-/react-dom-18.2.14.tgz#c01ba40e5bb57fc1dc41569bb3ccdb19eab1c539"
-  integrity sha512-V835xgdSVmyQmI1KLV2BEIUgqEuinxp9O4G6g3FqO/SqLac049E53aysv0oEFD2kHfejeKU+ZqL2bcFWj9gLAQ==
+"@types/react-dom@^18.2.15":
+  version "18.2.15"
+  resolved "https://registry.yarnpkg.com/@types/react-dom/-/react-dom-18.2.15.tgz#921af67f9ee023ac37ea84b1bc0cc40b898ea522"
+  integrity sha512-HWMdW+7r7MR5+PZqJF6YFNSCtjz1T0dsvo/f1BV6HkV+6erD/nA7wd9NM00KVG83zf2nJ7uATPO9ttdIPvi3gg==
   dependencies:
     "@types/react" "*"
 
@@ -1336,10 +1336,10 @@
     "@types/scheduler" "*"
     csstype "^3.0.2"
 
-"@types/react@^18.2.34":
-  version "18.2.34"
-  resolved "https://registry.yarnpkg.com/@types/react/-/react-18.2.34.tgz#aed20f19473721ba328feb99d1ec3307ebc1a8dd"
-  integrity sha512-U6eW/alrRk37FU/MS2RYMjx0Va2JGIVXELTODaTIYgvWGCV4Y4TfTUzG8DdmpDNIT0Xpj/R7GfyHOJJrDttcvg==
+"@types/react@^18.2.37":
+  version "18.2.37"
+  resolved "https://registry.yarnpkg.com/@types/react/-/react-18.2.37.tgz#0f03af69e463c0f19a356c2660dbca5d19c44cae"
+  integrity sha512-RGAYMi2bhRgEXT3f4B92WTohopH6bIXw05FuGlmJEnv/omEn190+QYEIYxIAuIBdKgboYYdVved2p1AxZVQnaw==
   dependencies:
     "@types/prop-types" "*"
     "@types/scheduler" "*"
@@ -5121,10 +5121,10 @@ vite-plugin-imagemin@^0.6.1:
     jpegtran-bin "^6.0.1"
     pathe "^0.2.0"
 
-vite-plugin-pwa@^0.16.6:
-  version "0.16.6"
-  resolved "https://registry.yarnpkg.com/vite-plugin-pwa/-/vite-plugin-pwa-0.16.6.tgz#71c56d36a8214cdd1539baf907a50ace7bee63d9"
-  integrity sha512-bQPDOWvhPMwydMoWqohXvIzvrq4X8iuCF+q95qEiaM4yC0ybViGKWMnWcpWp0vcnoLk7QvxHDlK65KUZvqB3Sg==
+vite-plugin-pwa@^0.16.7:
+  version "0.16.7"
+  resolved "https://registry.yarnpkg.com/vite-plugin-pwa/-/vite-plugin-pwa-0.16.7.tgz#3dcacc342766ff3598472ac7d5e0782d14e2853e"
+  integrity sha512-4WMA5unuKlHs+koNoykeuCfTcqEGbiTRr8sVYUQMhc6tWxZpSRnv9Ojk4LKmqVhoPGHfBVCdGaMo8t9Qidkc1Q==
   dependencies:
     debug "^4.3.4"
     fast-glob "^3.3.1"
@@ -5132,10 +5132,10 @@ vite-plugin-pwa@^0.16.6:
     workbox-build "^7.0.0"
     workbox-window "^7.0.0"
 
-vite-plugin-webfont-dl@^3.8.0:
-  version "3.8.0"
-  resolved "https://registry.yarnpkg.com/vite-plugin-webfont-dl/-/vite-plugin-webfont-dl-3.8.0.tgz#c970bdee549c6b2ef3ec1652e8eb3dbc25ed1995"
-  integrity sha512-0m44Um4bnH3NrWr98jNPhJDW4DzBUhyIQ1vSFriSBTqNe/ljgMlmwbX2xac+5/05jOOazXAFeSnpij32yHsgsw==
+vite-plugin-webfont-dl@^3.8.1:
+  version "3.8.1"
+  resolved "https://registry.yarnpkg.com/vite-plugin-webfont-dl/-/vite-plugin-webfont-dl-3.8.1.tgz#9ad45c33238f0639897f289b8d9a07de8113f752"
+  integrity sha512-Rj4qrlR5NGKBMFbKKgwxW18kLxftW6zBAgWORWCgb6eGZOOlPIjQE6NKJ2QviApxYTVb2Jm3Ze6sGBuJRdxsRA==
   dependencies:
     axios "^1"
     clean-css "^5"
