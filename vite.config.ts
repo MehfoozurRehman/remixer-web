@@ -18,11 +18,12 @@ const alias = {
   ...config.alias,
 };
 
-const aliasForJsConfig = Object.keys(alias).reduce((acc, key) => {
-  const value = alias[key].replace("/", "./");
-  acc[key] = [`${value}/*`];
-  return acc;
-}, {});
+const aliasForJsConfig = Object.fromEntries(
+  Object.entries(alias).map(([key, value]) => [
+    key,
+    [value.replace("/", "./") + "/*"],
+  ])
+);
 
 const jsConfig = {
   compilerOptions: {
