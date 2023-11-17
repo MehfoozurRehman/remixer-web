@@ -58,14 +58,15 @@ export default defineConfig({
   resolve: { alias },
   plugins: [
     config.autoExport && HotExport(),
-    config.compression && chunkSplitPlugin(),
-    config.fontOptimization && ViteWebfontDownload(),
-    config.progressiveWebApp && VitePWA({ registerType: "autoUpdate" }),
-    config.compression &&
+    config.compression && [
+      chunkSplitPlugin(),
       viteCompression({
         algorithm: "brotliCompress",
         threshold: 100,
       }),
+    ],
+    config.fontOptimization && ViteWebfontDownload(),
+    config.progressiveWebApp && VitePWA({ registerType: "autoUpdate" }),
     config.imagesOptimization &&
       viteImagemin(
         config.imagesOptimizationOptions || {
@@ -87,5 +88,5 @@ export default defineConfig({
         }
       ),
     react(),
-  ],
+  ].filter(Boolean),
 });
