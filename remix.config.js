@@ -5,6 +5,6 @@ export const config = {
   progressiveWebApp: false,
   imagesOptimization: false,
   alias: {
-    // "@somealias": "/src/somepath",
+    // Example: "@somealias": "/src/somepath",
   },
 };
