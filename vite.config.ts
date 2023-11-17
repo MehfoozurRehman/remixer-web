@@ -42,12 +42,16 @@ try {
 const assetsFolder = "./src/assets";
 const componentsFolder = "./src/components";
 
-if (!existsSync(assetsFolder)) {
-  mkdirSync(assetsFolder);
-}
+try {
+  if (!existsSync(assetsFolder)) {
+    mkdirSync(assetsFolder);
+  }
 
-if (!existsSync(componentsFolder)) {
-  mkdirSync(componentsFolder);
+  if (!existsSync(componentsFolder)) {
+    mkdirSync(componentsFolder);
+  }
+} catch (error) {
+  console.error("Error creating folders:", error);
 }
 
 export default defineConfig({
