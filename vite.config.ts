@@ -33,9 +33,12 @@ const jsConfig = {
   },
 };
 
-writeFileSync("./jsconfig.json", JSON.stringify(jsConfig, null, 2));
+try {
+  writeFileSync("./jsconfig.json", JSON.stringify(jsConfig, null, 2));
+} catch (error) {
+  console.error("Error writing jsconfig.json:", error);
+}
 
-// create assets and components folder
 const assetsFolder = "./src/assets";
 const componentsFolder = "./src/components";
 
