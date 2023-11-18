@@ -87,23 +87,34 @@ const insertRoute = (routes, segments, route) => {
   segments.reduce(insertNode, {});
 };
 
-const createRoutes = (routes, isEager) =>
-  Object.keys(routes).reduce((result, key) => {
-    const module = routes[key];
-    const route = createRoute(module, isEager);
+const createEagerRoutes = (eagers) =>
+  Object.keys(eagers).reduce((routes, key) => {
+    const module = eagers[key];
+    const route = createRoute(module, true);
     const segments = createPathSegments(key);
-    insertRoute(result, segments, route);
-    return result;
+    insertRoute(routes, segments, route);
+    return routes;
   }, []);
 
-export const LazyRoutes = createRoutes(LAZY_ROUTES, false);
+const createLazyRoutes = (lazys) =>
+  Object.keys(lazys).reduce((routes, key) => {
+    const module = lazys[key];
+    const route = createRoute(module, false);
+    const segments = createPathSegments(key);
+    insertRoute(routes, segments, route);
+    return routes;
+  }, []);
+
+const EagerRoutes = createEagerRoutes(EAGER_ROUTES);
+
+export const LazyRoutes = createLazyRoutes(LAZY_ROUTES);
 
 const router = createBrowserRouter([
   {
     path: "/",
     Component: App,
     ErrorBoundary: () => <ErrorBoundary isFullPage />,
-    children: [...createRoutes(EAGER_ROUTES, true), ...LazyRoutes],
+    children: [...EagerRoutes, ...LazyRoutes],
   },
   { path: "*", Component: NotFound },
 ]);
