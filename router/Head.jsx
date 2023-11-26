@@ -15,49 +15,45 @@ export default function Head({
   keywords,
   robots,
 }) {
-  const metaData = useMemo(() => {
-    const metaArray = [
-      { name: "title", content: title },
-      { name: "description", content: description },
-      { name: "url", content: url },
-      { name: "image", content: image },
-      { name: "author", content: author },
-      { name: "keywords", content: keywords },
-      { name: "robots", content: robots },
-      { property: "og:title", content: title },
-      { property: "og:description", content: description },
-      { property: "og:url", content: url },
-      { property: "og:image", content: image },
-    ];
-
-    if (type) metaArray.push({ property: "og:type", content: type });
-    if (siteName)
-      metaArray.push({ property: "og:site_name", content: siteName });
-    if (domain) metaArray.push({ property: "twitter:domain", content: domain });
-    if (card) metaArray.push({ property: "twitter:card", content: card });
-
-    return metaArray;
-  }, [
-    title,
-    description,
-    url,
-    image,
-    type,
-    siteName,
-    domain,
-    card,
-    author,
-    keywords,
-    robots,
-  ]);
+  const metaTags = useMemo(
+    () =>
+      [
+        { name: "title", content: title },
+        { name: "description", content: description },
+        { name: "url", content: url },
+        { name: "image", content: image },
+        { name: "author", content: author },
+        { name: "keywords", content: keywords },
+        { name: "robots", content: robots },
+        { property: "og:title", content: title },
+        { property: "og:description", content: description },
+        { property: "og:url", content: url },
+        { property: "og:image", content: image },
+        type && { property: "og:type", content: type },
+        siteName && { property: "og:site_name", content: siteName },
+        domain && { property: "twitter:domain", content: domain },
+        card && { property: "twitter:card", content: card },
+      ].filter(Boolean),
+    [
+      title,
+      description,
+      url,
+      image,
+      type,
+      siteName,
+      domain,
+      card,
+      author,
+      keywords,
+      robots,
+    ]
+  );
 
   return (
     <Helmet>
-      {metaData
-        .filter((meta) => meta.content)
-        .map((meta, index) => (
-          <meta key={meta.name || meta.property || index} {...meta} />
-        ))}
+      {metaTags.map((tag, index) => (
+        <meta key={tag.name || tag.property || index} {...tag} />
+      ))}
       <link rel="icon" href={image} />
       <link rel="apple-touch-icon" href={image} />
       <meta name="theme-color" content="#000000" />
