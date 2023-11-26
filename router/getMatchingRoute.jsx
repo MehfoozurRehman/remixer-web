@@ -3,19 +3,19 @@ import { LazyRoutes } from "./Router";
 const regexCache = new Map();
 
 export default function getMatchingRoute(path) {
-  return (
-    LazyRoutes.find((route) => {
-      const regex =
-        regexCache.get(route.path) ||
-        (() => {
-          const newRegex = new RegExp(
-            `^${route.path.replace(/:[^/]+/g, "([^/]+").replace(/\*/g, ".*")}$`
-          );
-          regexCache.set(route.path, newRegex);
-          return newRegex;
-        })();
+  for (const route of LazyRoutes) {
+    let regex = regexCache.get(route.path);
 
-      return regex.test(path);
-    }) || null
-  );
+    if (!regex) {
+      const newPath = route.path.replace(/:[^/]+/g, "([^/]+)").replace(/\*/g, ".*");
+      regex = new RegExp(`^${newPath}$`);
+      regexCache.set(route.path, regex);
+    }
+
+    if (regex.test(path)) {
+      return route;
+    }
+  }
+
+  return null;
 }
