@@ -1,5 +1,5 @@
+import { Fragment, Suspense, lazy } from "react";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import { Suspense, lazy } from "react";
 
 import App from "@layouts/App";
 import ErrorBoundary from "@layouts/Error";
@@ -28,12 +28,10 @@ const getLoader = async (module, ...args) => {
 const createRoute = (module, isEager) => {
   const Component = isEager ? module.default : lazy(module);
 
-  const element = (
-    <Suspense fallback={<Loading />}>
-      <Component />
-    </Suspense>
-  );
+  const element = Component === undefined ? <Fragment /> : <Component />;
+
   const errorElement = <ErrorBoundary />;
+
   const preload = isEager ? null : module;
   const loader = isEager ? module?.loader : getLoader.bind(null, module);
   const action = isEager ? module?.action : getAction.bind(null, module);
@@ -41,13 +39,20 @@ const createRoute = (module, isEager) => {
   return { element, loader, action, preload, errorElement };
 };
 
-const createPathSegments = (key) =>
-  key
+const createPathSegments = (key) => {
+  const lowerCasePath = key.toLowerCase();
+  if (key === lowerCasePath) {
+    alert(`Path "${key}" is in lowercase.`);
+    throw new Error(`Path "${key}" is in lowercase.`);
+  }
+
+  return key
     .replace(/\/src\/screens|\.jsx|\[\.{3}.+\]|\.lazy/g, "")
     .replace(/\[(.+)\]/g, ":$1")
     .toLowerCase()
     .split("/")
     .filter((p) => !p.includes("_") && p !== "");
+};
 
 const insertRoute = (routes, segments, route) => {
   const insert = /^\w|\//.test(route.path) ? "unshift" : "push";
@@ -119,4 +124,8 @@ const router = createBrowserRouter([
   { path: "*", Component: NotFound },
 ]);
 
-export default () => <RouterProvider router={router} />;
+export default () => (
+  <Suspense fallback={<Loading />}>
+    <RouterProvider router={router} />
+  </Suspense>
+);
