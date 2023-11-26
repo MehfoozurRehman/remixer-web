@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 import getMatchingRoute from "./getMatchingRoute";
 
@@ -6,8 +6,9 @@ const ROOT_MARGIN = "200px";
 
 export default function usePrefetchLink(to, prefetch = true) {
   const [prefetched, setPrefetched] = useState(false);
+  const ref = useRef(null);
 
-  const preloadRoute = () => {
+  const preloadRoute = useCallback(() => {
     const route = getMatchingRoute(to);
     if (route) {
       try {
@@ -17,7 +18,7 @@ export default function usePrefetchLink(to, prefetch = true) {
         console.error("Error while preloading route:", error);
       }
     }
-  };
+  }, [to]);
 
   useEffect(() => {
     if (!prefetched && prefetch) {
@@ -30,16 +31,23 @@ export default function usePrefetchLink(to, prefetch = true) {
         },
         { rootMargin: ROOT_MARGIN }
       );
-      observer.observe(ref.current);
-      return () => observer.disconnect();
+      if (ref.current) {
+        observer.observe(ref.current);
+      }
+      return () => {
+        if (ref.current) {
+          observer.unobserve(ref.current);
+        }
+        observer.disconnect();
+      };
     }
-  }, [to, prefetch, prefetched]);
+  }, [prefetched, prefetch, preloadRoute]);
 
   const handleMouseEnter = useCallback(() => {
     if (!prefetched) {
       preloadRoute();
     }
-  }, [to, prefetched]);
+  }, [prefetched, preloadRoute]);
 
-  return { handleMouseEnter };
+  return { handleMouseEnter, ref };
 }
