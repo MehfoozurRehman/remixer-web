@@ -3,7 +3,7 @@ import { memo, useRef } from "react";
 import { NavLink as RouterNavLink } from "react-router-dom";
 import usePrefetchLink from "./usePrefetchLink";
 
-export default memo(({ to, prefetch = true, ...props }) => {
+export default memo(({ to, prefetch = true, className, ...props }) => {
   const ref = useRef(null);
   const { handleMouseEnter } = usePrefetchLink(to, prefetch);
 
@@ -12,6 +12,14 @@ export default memo(({ to, prefetch = true, ...props }) => {
       ref={ref}
       to={to}
       onMouseEnter={handleMouseEnter}
+      className={({ isActive, isPending, isTransitioning }) =>
+        [
+          isPending ? "pending" : "",
+          isActive ? "active" : "",
+          isTransitioning ? "transitioning" : "",
+          className || "",
+        ].join(" ")
+      }
       {...props}
     />
   );
