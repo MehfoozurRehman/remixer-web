@@ -4,7 +4,9 @@ import { Fragment, lazy } from "react";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
 import App from "@layouts/App";
+import ErrorBoundary from "@layouts/Error";
 import Loading from "@layouts/Loading";
+import NotFound from "@layouts/NotFound";
 
 const LAZY_ROUTES = import.meta.glob("/src/screens/**/*.lazy.jsx");
 
@@ -12,9 +14,6 @@ const EAGER_ROUTES = import.meta.glob(
   ["/src/screens/**/*.jsx", "!/src/screens/**/*.lazy.jsx"],
   { eager: true }
 );
-
-const ErrorBoundary = lazy(() => import("@layouts/Error"));
-const NotFound = lazy(() => import("@layouts/NotFound"));
 
 const getAction = async (module, ...args) => {
   const { action } = await module();
