@@ -8,11 +8,11 @@ export default function usePrefetchLink(to, prefetch = true) {
   const [prefetched, setPrefetched] = useState(false);
   const ref = useRef(null);
 
-  const preloadRoute = useCallback(() => {
+  const preloadRoute = useCallback(async () => {
     const route = getMatchingRoute(to);
     if (route) {
       try {
-        route.preload();
+        await route.preload();
         setPrefetched(true);
       } catch (error) {
         console.error("Error while preloading route:", error);
