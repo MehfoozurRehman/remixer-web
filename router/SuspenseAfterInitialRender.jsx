@@ -1,6 +1,6 @@
 import { Suspense, memo, useRef } from "react";
 
-export default memo(({ fallback, children }) => {
+const SuspenseAfterInitialRender = memo(({ fallback, children }) => {
   const isInitialRenderRef = useRef(true);
 
   if (isInitialRenderRef.current) {
@@ -10,3 +10,5 @@ export default memo(({ fallback, children }) => {
 
   return <Suspense fallback={fallback}>{children}</Suspense>;
 });
+
+export default SuspenseAfterInitialRender;
