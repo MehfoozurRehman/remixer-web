@@ -57,7 +57,7 @@ try {
 export default defineConfig({
   resolve: { alias },
   plugins: [
-    config.autoExport && HotExport(),
+    HotExport(),
     config.compression && [
       chunkSplitPlugin(),
       viteCompression({
