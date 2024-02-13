@@ -8,4 +8,7 @@ export const config = {
   alias: {
     // "@somealias": "/src/somepath",
   },
+  autoExports: [
+    // "globals"
+  ],
 };
