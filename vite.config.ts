@@ -1,4 +1,4 @@
-import { existsSync, mkdirSync, writeFileSync } from "fs";
+import { access, mkdir, writeFile } from "fs/promises";
 
 import HotExport from "vite-plugin-hot-export";
 import { VitePWA } from "vite-plugin-pwa";
@@ -33,26 +33,34 @@ const jsConfig = {
   },
 };
 
-try {
-  writeFileSync("./jsconfig.json", JSON.stringify(jsConfig, null, 2));
-} catch (error) {
-  console.error("Error writing jsconfig.json:", error);
+async function createFoldersIfNeeded() {
+  try {
+    await Promise.all([
+      access(assetsFolder).catch(() => mkdir(assetsFolder)),
+      access(componentsFolder).catch(() => mkdir(componentsFolder)),
+    ]);
+  } catch (error) {
+    console.error("Error creating folders:", error);
+  }
+}
+
+async function writeJsConfig() {
+  try {
+    await writeFile("./jsconfig.json", JSON.stringify(jsConfig, null, 2));
+  } catch (error) {
+    console.error("Error writing jsconfig.json:", error);
+  }
 }
 
 const assetsFolder = "./src/assets";
 const componentsFolder = "./src/components";
 
-try {
-  if (!existsSync(assetsFolder)) {
-    mkdirSync(assetsFolder);
-  }
-
-  if (!existsSync(componentsFolder)) {
-    mkdirSync(componentsFolder);
-  }
-} catch (error) {
-  console.error("Error creating folders:", error);
+async function configure() {
+  await createFoldersIfNeeded();
+  await writeJsConfig();
 }
+
+configure();
 
 export default defineConfig({
   resolve: { alias },
