@@ -1,5 +1,6 @@
 export const config = {
-  autoExport: true,
+  autoExportAssets: true,
+  autoExportComponents: true,
   compression: true,
   fontOptimization: true,
   progressiveWebApp: false,
