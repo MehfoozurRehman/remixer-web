@@ -111,8 +111,6 @@ export default () => (
   <RouterProvider
     router={router}
     fallbackElement={<Loading />}
-    future={{
-      v7_startTransition: true,
-    }}
+    future={{ v7_startTransition: true }}
   />
 );
