@@ -36,18 +36,19 @@ const createRoute = (module, isEager) => {
 };
 
 const createPathSegments = (key) => {
-  const lowerCasePath = key.toLowerCase();
-  if (key === lowerCasePath) {
+  if (key === key.toLowerCase()) {
     const errorMessage = `Path "${key}" is in lowercase.`;
     alert(errorMessage);
     throw new Error(errorMessage);
   }
-  return key
+
+  const keyWithoutUnnecessary = key
     .replace(/\/src\/screens|\.jsx|\[\.{3}.+\]|\.lazy/g, "")
-    .replace(/\[(.+?)\]/g, ":$1")
-    .toLowerCase()
-    .split("/")
-    .filter((p) => p !== "" && !p.includes("_"));
+    .replace(/\[(.+?)\]/g, ":$1");
+
+  const segments = keyWithoutUnnecessary.toLowerCase().split("/");
+
+  return segments.filter((p) => p && !p.includes("_"));
 };
 
 const insertRoute = (routes, segments, route) => {
