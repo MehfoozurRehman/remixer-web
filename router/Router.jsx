@@ -53,7 +53,7 @@ const createPathSegments = (key) => {
 
 const insertRoute = (routes, segments, route) => {
   const insert = /^\w|\//.test(route.path) ? "unshift" : "push";
-  const insertNode = (parent, segment, index) => {
+  segments.reduce((parent, segment, index) => {
     const path = segment.replace(/index|\./g, "");
     const root = index === 0;
     const leaf = index === segments.length - 1 && segments.length > 1;
@@ -79,8 +79,7 @@ const insertRoute = (routes, segments, route) => {
       parent?.children?.[insert]({ path: path.replace(/\/$/, ""), ...route });
     }
     return parent;
-  };
-  segments.reduce(insertNode, {});
+  }, {});
 };
 
 const createRoutes = (routes, modules, isEager) => {
