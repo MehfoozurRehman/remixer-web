@@ -1,15 +1,17 @@
-import { memo, useRef } from "react";
+import { memo, useCallback, useRef } from "react";
 
 import { Link as RouterLink } from "react-router-dom";
 import usePrefetchLink from "./usePrefetchLink";
 
-const Link = memo(({ to, prefetch = true, ...props }) => {
+const Link = ({ to, prefetch = true, ...props }) => {
   const ref = useRef(null);
-  const { handleMouseEnter } = usePrefetchLink(to, prefetch);
+  const handleMouseEnter = useCallback(() => {
+    usePrefetchLink(to, prefetch).handleMouseEnter();
+  }, [to, prefetch]);
 
   return (
     <RouterLink ref={ref} to={to} onMouseEnter={handleMouseEnter} {...props} />
   );
-});
+};
 
-export default Link;
+export default memo(Link);
