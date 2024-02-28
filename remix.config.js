@@ -6,7 +6,7 @@ export const config = {
   progressiveWebApp: false,
   imagesOptimization: false,
   alias: {
-    // "@somealias": "/src/somepath",
+    // "@globals": "/src/globals",
   },
   autoExports: [
     // "globals"
