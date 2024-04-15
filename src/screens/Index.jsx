@@ -1,4 +1,4 @@
-import Link from "@router/Link";
+import { Link } from "remixed";
 
 export default function Index() {
   return (
