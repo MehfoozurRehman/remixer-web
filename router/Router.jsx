@@ -7,6 +7,7 @@ import App from "@layouts/App";
 import ErrorBoundary from "@layouts/Error";
 import Loading from "@layouts/Loading";
 import NotFound from "@layouts/NotFound";
+import { createPortal } from "react-dom";
 
 const LAZY_ROUTES = import.meta.glob("/src/screens/**/*.lazy.jsx");
 
@@ -25,9 +26,33 @@ const getLoader = async (module, ...args) => {
   return loader && typeof loader === "function" ? loader(...args) : null;
 };
 
-const createRoute = (module, isEager) => {
-  const Component = isEager ? module.default : lazy(module);
-  const element = Component ? <Component /> : <Fragment />;
+const createRoute = (
+  module,
+  isEager,
+  isSibling = false,
+  parentModule,
+  isParentEager
+) => {
+  const Component = isEager ? module?.default : lazy(module);
+
+  const ParentComponent = isSibling
+    ? isParentEager
+      ? parentModule?.default
+      : lazy(parentModule)
+    : Fragment;
+
+  const element = Component ? (
+    isSibling ? (
+      <>
+        <ParentComponent />
+        {createPortal(<Component />, document.body)}
+      </>
+    ) : (
+      <Component />
+    )
+  ) : (
+    <Fragment />
+  );
   const errorElement = <ErrorBoundary />;
   const preload = isEager ? null : module;
   const loader = isEager ? module?.loader : getLoader.bind(null, module);
@@ -45,6 +70,8 @@ const createPathSegments = (key) => {
   const keyWithoutUnnecessary = key
     .replace(/\/src\/screens|\.jsx|\[\.{3}.+\]|\.lazy/g, "")
     .replace(/\[(.+?)\]/g, ":$1");
+  // .replace(/.\(/g, "/")
+  // .replace(/\)/g, "");
 
   const segments = keyWithoutUnnecessary.toLowerCase().split("/");
 
@@ -87,8 +114,23 @@ const createRoutes = (routes, modules, isEager) => {
   const length = keys.length;
   for (let i = 0; i < length; i++) {
     const key = keys[i];
-    const route = createRoute(modules[key], isEager);
+    const parentKey = key.replace(/\.\(.+\)/g, "");
+    const isParentEager = Object.keys(EAGER_ROUTES).includes(parentKey);
+
+    const isSibling = key.includes("(");
+
+    const route = createRoute(
+      modules[key],
+      isEager,
+      isSibling,
+      modules[parentKey],
+      isParentEager
+    );
+
     const segments = createPathSegments(key);
+
+    console.log("segments", segments, route);
+
     insertRoute(routes, segments, route);
   }
   return routes;
