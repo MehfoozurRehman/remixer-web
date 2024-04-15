@@ -3,8 +3,6 @@ export const config = {
   fontOptimization: true,
   progressiveWebApp: false,
   imagesOptimization: false,
-  alias: {
-    // "@globals": "/src/globals",
-  },
-  autoExports: ["globals"],
+  // alias: { "@globals": "/src/globals" },
+  // autoExports: ["globals"],
 };
