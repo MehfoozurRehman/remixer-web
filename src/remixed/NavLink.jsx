@@ -1,13 +1,15 @@
 import { memo, useCallback, useRef } from "react";
 
 import { NavLink as RouterLink } from "react-router-dom";
-import usePrefetchLink from "../../router/usePrefetchLink";
+import usePrefetchLink from "@router/usePrefetchLink";
 
 const NavLink = ({ to, prefetch = true, ...props }) => {
   const ref = useRef(null);
 
+  const prefetchLink = usePrefetchLink(to, prefetch);
+
   const handleMouseEnter = useCallback(() => {
-    usePrefetchLink(to, prefetch).handleMouseEnter();
+    prefetchLink.handleMouseEnter();
   }, [to, prefetch]);
 
   return (
