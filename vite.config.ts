@@ -1,4 +1,4 @@
-import { access, mkdir, writeFile } from "fs/promises";
+import { access, mkdir } from "fs/promises";
 
 import HotExport from "vite-plugin-hot-export";
 import { VitePWA } from "vite-plugin-pwa";
@@ -18,23 +18,11 @@ const alias = {
   ...config.alias,
 };
 
-const aliasForJsConfig = Object.fromEntries(
-  Object.entries(alias).map(([key, value]) => [
-    key,
-    [value.replace("/", "./") + "/*"],
-  ])
-);
-
-const jsConfig = {
-  compilerOptions: {
-    baseUrl: ".",
-    target: "esnext",
-    paths: aliasForJsConfig,
-  },
-};
-
 async function createFoldersIfNeeded() {
   try {
+    const assetsFolder = "./src/assets";
+    const componentsFolder = "./src/components";
+
     await Promise.all([
       access(assetsFolder).catch(() => mkdir(assetsFolder)),
       access(componentsFolder).catch(() => mkdir(componentsFolder)),
@@ -44,23 +32,7 @@ async function createFoldersIfNeeded() {
   }
 }
 
-async function writeJsConfig() {
-  try {
-    await writeFile("./jsconfig.json", JSON.stringify(jsConfig, null, 2));
-  } catch (error) {
-    console.error("Error writing jsconfig.json:", error);
-  }
-}
-
-const assetsFolder = "./src/assets";
-const componentsFolder = "./src/components";
-
-async function configure() {
-  await createFoldersIfNeeded();
-  await writeJsConfig();
-}
-
-configure();
+createFoldersIfNeeded();
 
 export default defineConfig({
   resolve: { alias },
