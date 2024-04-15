@@ -1,6 +1,4 @@
 export const config = {
-  autoExportAssets: true,
-  autoExportComponents: true,
   compression: true,
   fontOptimization: true,
   progressiveWebApp: false,
@@ -8,7 +6,5 @@ export const config = {
   alias: {
     // "@globals": "/src/globals",
   },
-  autoExports: [
-    // "globals"
-  ],
+  autoExports: ["globals"],
 };
