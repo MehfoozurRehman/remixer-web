@@ -26,7 +26,7 @@ const getLoader = async (module, ...args) => {
 };
 
 const createRoute = (module, isEager) => {
-  const Component = isEager ? module.default : lazy(() => module);
+  const Component = isEager ? module.default : lazy(module);
   const element = Component ? <Component /> : <Fragment />;
   const errorElement = <ErrorBoundary />;
   const preload = isEager ? null : module;
