@@ -1,20 +1,22 @@
 import { config } from "./remix.config.js";
 import { defineExportConfig } from "vite-plugin-hot-export";
 
-const { autoExportComponents, autoExportAssets, autoExports } = config;
+const { autoExports } = config;
 
-const defaultConfigs = [
-  autoExportComponents && { targetDir: "./src/components" },
-  autoExportAssets && {
+const routeConfigs =
+  autoExports?.map((path) => ({
+    targetDir: "./src/" + path,
+    depth: true,
+  })) || [];
+
+const configs = [
+  { targetDir: "./src/components", depth: true },
+  {
     targetDir: "./src/assets",
     autoPrefix: true,
     depth: true,
   },
-].filter(Boolean);
+  ...routeConfigs,
+];
 
-const routeConfigs =
-  autoExports?.map(({ path }) => ({ targetDir: path })) || [];
-
-export default defineExportConfig({
-  configs: [...defaultConfigs, ...routeConfigs],
-});
+export default defineExportConfig({ configs });
