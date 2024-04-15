@@ -4268,7 +4268,7 @@ pngquant-bin@^6.0.0:
     bin-wrapper "^4.0.1"
     execa "^4.0.0"
 
-postcss@^8.4.36:
+postcss@^8.4.38:
   version "8.4.38"
   resolved "https://registry.yarnpkg.com/postcss/-/postcss-8.4.38.tgz#b387d533baf2054288e337066d81c6bee9db9e0e"
   integrity sha512-Wglpdk03BSfXkHoQa3b/oulrotAkwrlLDRSOb9D0bN86FdRyE9lppSp33aHNPgBa0JKCoB+drFLZkQoRRYae5A==
@@ -4644,10 +4644,10 @@ safe-regex-test@^1.0.0:
     get-intrinsic "^1.1.3"
     is-regex "^1.1.4"
 
-sass@^1.72.0:
-  version "1.72.0"
-  resolved "https://registry.yarnpkg.com/sass/-/sass-1.72.0.tgz#5b9978943fcfb32b25a6a5acb102fc9dabbbf41c"
-  integrity sha512-Gpczt3WA56Ly0Mn8Sl21Vj94s1axi9hDIzDFn9Ph9x3C3p4nNyvsqJoQyVXKou6cBlfFWEgRW4rT8Tb4i3XnVA==
+sass@^1.75.0:
+  version "1.75.0"
+  resolved "https://registry.yarnpkg.com/sass/-/sass-1.75.0.tgz#91bbe87fb02dfcc34e052ddd6ab80f60d392be6c"
+  integrity sha512-ShMYi3WkrDWxExyxSZPst4/okE9ts46xZmJDSawJQrnte7M1V9fScVB+uNXOVKRBt0PggHOwoZcn8mYX4trnBw==
   dependencies:
     chokidar ">=3.0.0 <4.0.0"
     immutable "^4.0.0"
@@ -5338,10 +5338,10 @@ vite-plugin-imagemin@^0.6.1:
     jpegtran-bin "^6.0.1"
     pathe "^0.2.0"
 
-vite-plugin-pwa@^0.19.5:
-  version "0.19.5"
-  resolved "https://registry.yarnpkg.com/vite-plugin-pwa/-/vite-plugin-pwa-0.19.5.tgz#50692c46abc74d161cdd18c5cf8d21e5ce68563e"
-  integrity sha512-3xJEc2Gmq6SBf730UAV1N2/MqOm+MiyvaLToSTglg+pH9b9qm666yPVxrBBlcOhGoJJWjJpu+Z9tROKek2CODg==
+vite-plugin-pwa@^0.19.8:
+  version "0.19.8"
+  resolved "https://registry.yarnpkg.com/vite-plugin-pwa/-/vite-plugin-pwa-0.19.8.tgz#f7be200a4426207358aef807b4a6e1ecbc14d345"
+  integrity sha512-e1oK0dfhzhDhY3VBuML6c0h8Xfx6EkOVYqolj7g+u8eRfdauZe5RLteCIA/c5gH0CBQ0CNFAuv/AFTx4Z7IXTw==
   dependencies:
     debug "^4.3.4"
     fast-glob "^3.3.2"
@@ -5349,23 +5349,23 @@ vite-plugin-pwa@^0.19.5:
     workbox-build "^7.0.0"
     workbox-window "^7.0.0"
 
-vite-plugin-webfont-dl@^3.9.1:
-  version "3.9.1"
-  resolved "https://registry.yarnpkg.com/vite-plugin-webfont-dl/-/vite-plugin-webfont-dl-3.9.1.tgz#ccbb1450e20f8d5b34649f45b905671fa375fe9e"
-  integrity sha512-nr6UN0Y9ZDbtjwe0/3j+w5VdQCeYWjsgx3IaHg2EvhhbgDM44wmJLQ2ecHWduo0o+PJEmBJK6QhST6z7qxKwnA==
+vite-plugin-webfont-dl@^3.9.3:
+  version "3.9.3"
+  resolved "https://registry.yarnpkg.com/vite-plugin-webfont-dl/-/vite-plugin-webfont-dl-3.9.3.tgz#22c01438e469a55dc7a3539ca20c364f136f850e"
+  integrity sha512-6qOGANGBTg/sO3lBVdCmvjBrPV/G/Aus+UAfgW6cwXNYmaqHcbitEMeUrLLXhTkWXB7H2pzolwq0RzGKMTExMg==
   dependencies:
     axios "^1"
     clean-css "^5"
     flat-cache "^3"
     picocolors "^1"
 
-vite@^5.2.2:
-  version "5.2.2"
-  resolved "https://registry.yarnpkg.com/vite/-/vite-5.2.2.tgz#b98f8de352d22e21d99508274ddd053ef82bf238"
-  integrity sha512-FWZbz0oSdLq5snUI0b6sULbz58iXFXdvkZfZWR/F0ZJuKTSPO7v72QPXt6KqYeMFb0yytNp6kZosxJ96Nr/wDQ==
+vite@^5.2.8:
+  version "5.2.8"
+  resolved "https://registry.yarnpkg.com/vite/-/vite-5.2.8.tgz#a99e09939f1a502992381395ce93efa40a2844aa"
+  integrity sha512-OyZR+c1CE8yeHw5V5t59aXsUPPVTHMDjEZz8MgguLL/Q7NblxhZUlTu9xSPqlsUO/y+X7dlU05jdhvyycD55DA==
   dependencies:
     esbuild "^0.20.1"
-    postcss "^8.4.36"
+    postcss "^8.4.38"
     rollup "^4.13.0"
   optionalDependencies:
     fsevents "~2.3.3"
