@@ -4,6 +4,7 @@
     "**/main.jsx": true,
     "**/index.ts": true,
     "**/vite.config.ts": true,
-    "**/export.config.ts": true
+    "**/export.config.ts": true,
+    "**/remixed": true
   }
 }
