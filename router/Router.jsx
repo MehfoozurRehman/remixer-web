@@ -1,5 +1,3 @@
-import.meta.glob("/src/styles/*.(scss|css)", { eager: true });
-
 import { Fragment, lazy } from "react";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
