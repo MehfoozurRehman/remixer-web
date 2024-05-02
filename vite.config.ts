@@ -12,10 +12,9 @@ import viteImagemin from "vite-plugin-imagemin";
 
 const alias = {
   remixed: "/src/remixed",
-  "@components": "/src/components",
-  "@assets": "/src/assets",
   "@router": "/router",
   "@layouts": "/src/layouts",
+  "@": "/src",
   ...config.alias,
 };
 
