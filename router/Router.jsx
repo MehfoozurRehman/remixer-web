@@ -1,4 +1,4 @@
-import { Fragment, lazy } from "react";
+import { Fragment, Suspense, lazy, useMemo } from "react";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
 import App from "@layouts/App";
@@ -25,7 +25,13 @@ const getLoader = async (module, ...args) => {
 
 const createRoute = (module, isEager) => {
   const Component = isEager ? module.default : lazy(module);
-  const element = Component ? <Component /> : <Fragment />;
+  const element = Component ? (
+    <Suspense fallback={<Loading />}>
+      <Component />
+    </Suspense>
+  ) : (
+    <Fragment />
+  );
   const errorElement = <ErrorBoundary />;
   const preload = isEager ? null : module;
   const loader = isEager ? module?.loader : getLoader.bind(null, module);
@@ -105,10 +111,13 @@ const router = createBrowserRouter([
   { path: "*", Component: NotFound },
 ]);
 
-export default () => (
-  <RouterProvider
-    router={router}
-    fallbackElement={<Loading />}
-    future={{ v7_startTransition: true }}
-  />
-);
+export default () => {
+  const memoizedRouter = useMemo(() => router, []);
+  return (
+    <RouterProvider
+      router={memoizedRouter}
+      fallbackElement={<Loading />}
+      future={{ v7_startTransition: true }}
+    />
+  );
+};
