@@ -1,5 +1,5 @@
-import { Fragment, Suspense, lazy, useMemo } from "react";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import { Suspense, lazy, useMemo } from "react";
 
 import App from "@/layouts/App";
 import ErrorBoundary from "@/layouts/Error";
@@ -7,7 +7,6 @@ import Loading from "@/layouts/Loading";
 import NotFound from "@/layouts/NotFound";
 
 const LAZY_ROUTES = import.meta.glob("/src/screens/**/*.lazy.jsx");
-
 const EAGER_ROUTES = import.meta.glob(
   ["/src/screens/**/*.jsx", "!/src/screens/**/*.lazy.jsx"],
   { eager: true }
@@ -25,18 +24,17 @@ const getLoader = async (module, ...args) => {
 
 const createRoute = (module, isEager) => {
   const Component = isEager ? module.default : lazy(module);
-  const element = Component ? (
-    <Suspense fallback={<Loading />}>
-      <Component />
-    </Suspense>
-  ) : (
-    <Fragment />
-  );
-  const errorElement = <ErrorBoundary />;
-  const preload = isEager ? null : module;
-  const loader = isEager ? module?.loader : getLoader.bind(null, module);
-  const action = isEager ? module?.action : getAction.bind(null, module);
-  return { element, loader, action, preload, errorElement };
+  return {
+    element: (
+      <Suspense fallback={<Loading />}>
+        <Component />
+      </Suspense>
+    ),
+    loader: isEager ? module?.loader : getLoader.bind(null, module),
+    action: isEager ? module?.action : getAction.bind(null, module),
+    preload: isEager ? null : module,
+    errorElement: <ErrorBoundary />,
+  };
 };
 
 const createPathSegments = (key) => {
