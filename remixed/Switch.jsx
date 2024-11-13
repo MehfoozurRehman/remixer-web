@@ -1,20 +1,20 @@
-import { memo } from "react";
+import { Children, memo } from "react";
 
-export function Case({ children }) {
-  return children;
-}
+export const Case = ({ children }) => children;
 
-export function Default({ children }) {
-  return children;
-}
+export const Default = ({ children }) => children;
 
-function Switch({ expression, children }) {
-  const cases = children.filter((child) => child.type.name === "Case");
-  const defaultCase = children.find((child) => child.type.name === "Default");
+const Switch = ({ expression, children }) => {
+  let defaultCase;
+  const selectedCase = Children.toArray(children).find((child) => {
+    if (child.type === Default) {
+      defaultCase = child;
+      return false;
+    }
+    return child.type === Case && child.props.value === expression;
+  });
 
-  const selectedCase = cases.find((child) => child.props.value === expression);
-
-  return selectedCase || defaultCase;
-}
+  return selectedCase || defaultCase || null;
+};
 
 export default memo(Switch);
