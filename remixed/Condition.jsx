@@ -1,15 +1,11 @@
 import { memo } from "react";
 
-export function True({ children }) {
-  return children;
-}
+export const True = ({ children }) => <>{children}</>;
 
-export function False({ children }) {
-  return children;
-}
+export const False = ({ children }) => <>{children}</>;
 
-function Condition({ expression, children }) {
+const Condition = ({ expression, children }) => {
   return expression ? children[0] : children[1];
-}
+};
 
 export default memo(Condition);
