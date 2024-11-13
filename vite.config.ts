@@ -19,17 +19,10 @@ const alias = {
 };
 
 async function createFoldersIfNeeded() {
-  try {
-    const assetsFolder = "./src/assets";
-    const componentsFolder = "./src/components";
-
-    await Promise.all([
-      access(assetsFolder).catch(() => mkdir(assetsFolder)),
-      access(componentsFolder).catch(() => mkdir(componentsFolder)),
-    ]);
-  } catch (error) {
-    console.error("Error creating folders:", error);
-  }
+  const folders = ["./src/assets", "./src/components"];
+  await Promise.all(
+    folders.map((folder) => access(folder).catch(() => mkdir(folder)))
+  ).catch((error) => console.error("Error creating folders:", error));
 }
 
 createFoldersIfNeeded();
