@@ -31,13 +31,9 @@ export default defineConfig({
   resolve: { alias },
   plugins: [
     HotExport(),
-    config.compression && [
-      chunkSplitPlugin(),
-      viteCompression({
-        algorithm: "brotliCompress",
-        threshold: 100,
-      }),
-    ],
+    config.compression && chunkSplitPlugin(),
+    config.compression &&
+      viteCompression({ algorithm: "brotliCompress", threshold: 100 }),
     config.fontOptimization && ViteWebfontDownload(),
     config.progressiveWebApp && VitePWA({ registerType: "autoUpdate" }),
     config.imagesOptimization &&
