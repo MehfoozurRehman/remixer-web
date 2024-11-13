@@ -3,20 +3,15 @@ import { LazyRoutes } from "./Router";
 const regexCache = new Map();
 
 export default function getMatchingRoute(path) {
-  let regex;
-
   for (const route of LazyRoutes) {
-    regex = regexCache.get(route.path);
-
-    if (!regex) {
+    if (!regexCache.has(route.path)) {
       const newPath = route.path
         .replace(/:[^/]+/g, "([^/]+)")
         .replace(/\*/g, ".*");
-      regex = new RegExp(`^${newPath}$`);
-      regexCache.set(route.path, regex);
+      regexCache.set(route.path, new RegExp(`^${newPath}$`));
     }
 
-    if (regex.test(path)) {
+    if (regexCache.get(route.path).test(path)) {
       return route;
     }
   }
