@@ -1,4 +1,4 @@
-import { Link } from "remixed";
+import { Link } from "@/remixed";
 
 export default function Index() {
   return (
