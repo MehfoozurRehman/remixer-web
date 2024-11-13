@@ -11,10 +11,10 @@ import viteCompression from "vite-plugin-compression";
 import viteImagemin from "vite-plugin-imagemin";
 
 const alias = {
-  remixed: "/src/remixed",
-  "@router": "/router",
-  "@layouts": "/src/layouts",
-  "@": "/src",
+  "@/remixed": "/remixed",
+  "@/router": "/router",
+  "@/layouts": "/src/layouts",
+  "@/": "/src",
   ...config.alias,
 };
 
