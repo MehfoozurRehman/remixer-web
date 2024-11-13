@@ -37,25 +37,23 @@ export default defineConfig({
     config.fontOptimization && ViteWebfontDownload(),
     config.progressiveWebApp && VitePWA({ registerType: "autoUpdate" }),
     config.imagesOptimization &&
-      viteImagemin(
-        config.imagesOptimizationOptions || {
-          gifsicle: { optimizationLevel: 7, interlaced: false },
-          optipng: { optimizationLevel: 7 },
-          mozjpeg: { quality: 30 },
-          webp: { quality: 70 },
-          svgo: {
-            multipass: true,
-            plugins: [
-              { name: "removeViewBox" },
-              { name: "minifyStyles" },
-              { name: "removeMetadata" },
-              { name: "removeUselessStrokeAndFill" },
-              { name: "reusePaths" },
-              { name: "removeEmptyAttrs", active: true },
-            ],
-          },
-        }
-      ),
+      viteImagemin({
+        gifsicle: { optimizationLevel: 7, interlaced: false },
+        optipng: { optimizationLevel: 7 },
+        mozjpeg: { quality: 30 },
+        webp: { quality: 70 },
+        svgo: {
+          multipass: true,
+          plugins: [
+            { name: "removeViewBox" },
+            { name: "minifyStyles" },
+            { name: "removeMetadata" },
+            { name: "removeUselessStrokeAndFill" },
+            { name: "reusePaths" },
+            { name: "removeEmptyAttrs", active: true },
+          ],
+        },
+      }),
     react(),
   ].filter(Boolean),
 });
