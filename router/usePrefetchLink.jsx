@@ -26,18 +26,17 @@ export default function usePrefetchLink(to, prefetch = true) {
         ([entry]) => {
           if (entry.isIntersecting) {
             preloadRoute();
-            observer.unobserve(ref.current);
+            observer.disconnect();
           }
         },
         { rootMargin: ROOT_MARGIN }
       );
+
       if (ref.current) {
         observer.observe(ref.current);
       }
+
       return () => {
-        if (ref.current) {
-          observer.unobserve(ref.current);
-        }
         observer.disconnect();
       };
     }
