@@ -1,10 +1,10 @@
 import { Fragment, Suspense, lazy, useMemo } from "react";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
-import App from "@layouts/App";
-import ErrorBoundary from "@layouts/Error";
-import Loading from "@layouts/Loading";
-import NotFound from "@layouts/NotFound";
+import App from "@/layouts/App";
+import ErrorBoundary from "@/layouts/Error";
+import Loading from "@/layouts/Loading";
+import NotFound from "@/layouts/NotFound";
 
 const LAZY_ROUTES = import.meta.glob("/src/screens/**/*.lazy.jsx");
 
