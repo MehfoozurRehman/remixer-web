@@ -44,13 +44,12 @@ const createPathSegments = (key) => {
     throw new Error(errorMessage);
   }
 
-  const keyWithoutUnnecessary = key
+  return key
     .replace(/\/src\/screens|\.jsx|\[\.{3}.+\]|\.lazy/g, "")
-    .replace(/\[(.+?)\]/g, ":$1");
-
-  const segments = keyWithoutUnnecessary.toLowerCase().split("/");
-
-  return segments.filter((p) => p && !p.includes("_"));
+    .replace(/\[(.+?)\]/g, ":$1")
+    .toLowerCase()
+    .split("/")
+    .filter((p) => p && !p.includes("_"));
 };
 
 const insertRoute = (routes, segments, route) => {
@@ -60,26 +59,28 @@ const insertRoute = (routes, segments, route) => {
     const root = index === 0;
     const leaf = index === segments.length - 1 && segments.length > 1;
     const node = !root && !leaf;
+
     if (root) {
-      const dynamic = path.startsWith("[") || path === "*";
-      if (dynamic) return parent;
-      const last = segments.length === 1;
-      if (last) {
+      if (path.startsWith("[") || path === "*") return parent;
+      if (segments.length === 1) {
         routes.push({ path, ...route });
         return parent;
       }
     }
+
     if (root || node) {
       const current = root ? routes : parent.children;
       const found = current?.find((route) => route.path === path);
-      found
-        ? (found.children ??= [])
-        : current?.[insert]({ path: path, children: [] });
+      if (!found) {
+        current?.[insert]({ path, children: [] });
+      }
       return found || current?.[insert === "unshift" ? 0 : current.length - 1];
     }
+
     if (leaf) {
       parent?.children?.[insert]({ path: path.replace(/\/$/, ""), ...route });
     }
+
     return parent;
   }, {});
 };
