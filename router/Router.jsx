@@ -87,14 +87,11 @@ const insertRoute = (routes, segments, route) => {
 };
 
 const createRoutes = (routes, modules, isEager) => {
-  const keys = Object.keys(modules);
-  const length = keys.length;
-  for (let i = 0; i < length; i++) {
-    const key = keys[i];
+  Object.keys(modules).forEach((key) => {
     const route = createRoute(modules[key], isEager);
     const segments = createPathSegments(key);
     insertRoute(routes, segments, route);
-  }
+  });
   return routes;
 };
 
