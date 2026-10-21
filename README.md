@@ -1,37 +1,37 @@
-# remixer
+# remixer-web
 
-## Description
+A React and Vite starter with file-based routing, lazy loading, a head component and a set of build optimizations.
 
-Welcome to our starter for React apps! Our goal is to provide you with the tools you need to speed up your development process. Our starter includes file-based routing, flattened and nested routes, as well as lazy loading to optimize asset loading. We also have automatic exporting for both components and assets, with import support for SASS or CSS files for easy styling. In addition, we offer support for prefetching and a head component. We were inspired by Next.js, but worked to incorporate the style of Remix to create a unique combination that we hope you'll love! 💖
+**Status:** Starter. Its own README describes it as a starter, and the committed code is a Vite configuration plus reusable route and layout components. It has no application-specific features.
 
-## Table of Contents
+## The problem
 
--[Usage](#usage)
+Setting up a React app with routing, lazy loading and production build tooling takes time. This starter provides that setup, with a Next.js-like routing style, so a new project starts with the pieces already in place.
 
--[Contributions](#contributions)
+## What it does
 
--[Questions](#questions)
+- File-based routing, with nested and lazy-loaded routes, as the README describes.
+- Exports reusable helper components from `remixed/`: `Head`, `Link`, `NavLink`, `Loop`, `Condition` and `SuspenseAfterInitialRender`.
+- Builds with Vite, with plugins for chunk splitting, gzip and brotli compression, image optimization, a PWA manifest, and downloading web fonts.
+- Supports SCSS imports for styles.
 
-## Usage
+## How it's built
 
-#### `yarn install`
+- React 18 with React Router 6 and `react-helmet` for the document head.
+- Vite 5 configured in `vite.config.ts`, with a separate `remix.config.js` and `export.config.ts` for the helper exports.
+- The `remixer` CLI clones this repository as its starter template, so the template is the source for new projects.
 
-#### `yarn dev`
+## Running it locally
 
-#### `yarn build`
+```bash
+pnpm install
+pnpm dev
+```
 
-#### `yarn preview`
+The package.json scripts are `dev`, `build` and `preview`. The README uses `yarn` commands, but the repo ships a `pnpm-lock.yaml`.
 
-## License
+## What's left
 
-MIT | Feel free to use this for your own projects
-
-## Contributions
-
-Just do it any help would be appriciated
-
-[ ] documentation
-
-## Author
-
-- [@mehfoozurrehman](https://www.github.com/mehfoozurrehman)
+- The README's only open contribution item is documentation.
+- There are no tests.
+- The README's routing and lazy-loading claims are not described with examples.
