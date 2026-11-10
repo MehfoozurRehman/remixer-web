@@ -26,4 +26,6 @@ dist
 # .gitignore
 jsconfig.json
 index.ts
-config.bat
+
+.env*
+!.env.example
